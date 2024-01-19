@@ -11,7 +11,7 @@ import { UserModule } from '../user/user.module';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     PassportModule,
     JwtModule.register({
-      secret: '<your secret>', // Change this to a secret key for JWT
+      secret: 'wer123', // Change this to a secret key for JWT
       signOptions: { expiresIn: '1h' }, // Set the expiration time for the token
     }),
     UserModule,

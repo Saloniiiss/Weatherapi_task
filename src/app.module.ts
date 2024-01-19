@@ -7,7 +7,7 @@ import { CityModule } from './city/city.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://wer123:wer123456@cluster0.fkvq8ig.mongodb.net/?retryWrites=true&w=majority', {
+    MongooseModule.forRoot('mongodb+srv://wer123:wer123456@cluster0.cgtanb8.mongodb.net/?retryWrites=true&w=majority', {
     }),
     UserModule,
     AuthModule,

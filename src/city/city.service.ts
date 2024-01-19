@@ -20,7 +20,7 @@ export class CityService {
     const cities = await this.getAllCities(); // use CityService to get cities
     const weatherDataPromises = cities.map(city =>
       this.httpService
-        .get(`http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=<your_id>`) // assuming city is an object with a name property
+        .get(`http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=23c234ed4201da818aa859f3c786c4f4`) // assuming city is an object with a name property
         .pipe(map(response => response.data))
         .toPromise(),
     );
