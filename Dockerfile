@@ -1,20 +1,28 @@
-# Use an official Node.js runtime as a base image
-FROM node:14
+# Stage 1: Build Node.js app
+FROM node:14 AS builder
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
-
-# Install the project dependencies
 RUN npm install
 
-# Copy the application files to the working directory
-COPY . /app
+COPY . .
+RUN npm run build
 
-# Expose the port your app runs on
-EXPOSE 3000
+# Stage 2: Build Nginx image
+FROM nginx:latest
 
-# Define the command to run your application
-CMD ["npm", "run", "start:prod"] 
+# Set the working directory in the Nginx container
+WORKDIR /usr/share/nginx/html
+
+# Copy the built app from the Node.js build stage
+COPY --from=builder /app .
+
+# Copy Nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Command to run Nginx
+CMD ["nginx", "-g", "daemon off;"]
